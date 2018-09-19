@@ -14,34 +14,33 @@ easy-sed is a very simple script that wraps the `sed` command and allows for fin
 Use common sense when inputting FIND and REPLACE strings that themselves contain single or double quotation marks
 
 ### Single Quotations and apostrophes
+Here we will lose our apostrophes because we kept them inside of single quotes
 ```sh
-# Here we will lose our apostrophes because we kept them inside of single quotes
 ./easy-sed.sh \
     '{{FIND_THIS_LITERAL}}' \
     'If I add apostrophes within 'single quotation marks'' 
     <<< 'eg: {{FIND_THIS_LITERAL}}'
-# output:
-# eg: If I add apostrophes within single quotation marks
 
-# Now we use dqoutes to wrap our replace string
-# Remember that special characters will now need to be broken with a backslash
+# eg: If I add apostrophes within single quotation marks
+```
+
+Now we use dqoutes to wrap our replace string. Remember that special characters will now need to be broken with a backslash `(!,",$,%)` etc.
+```sh
 ./easy-sed.sh \
     '{{FIND_THIS_LITERAL}}' \
     "But here I'll 'wrap' this string in double quotes" \
     <<< 'eg: {{FIND_THIS_LITERAL}}'
-# output:
+
 # eg: I'm going to use some 'double quotation marks' in this replace string
 ```
 
 ### Double Quotations and combinations of both
+Here we have a more complex replacement with apostrophes and dquotes. Remember that special characters will now need to be broken with a backslash
 ```sh
-# Here we have a more complex replacement with apostrophes and dquotes
-# Remember that special characters will now need to be broken with a backslash
-# e.g. ",%,$,!
 ./easy-sed.sh \
     '{{FIND_THIS_LITERAL}}' \
     "\"I'm falling down the hill, Jill\!\", Jack exclaimed." \
     <<< 'eg: {{FIND_THIS_LITERAL}}'
-# output:
+    
 # eg: "I'm falling down the hill, Jill!", Jack exclaimed.
 ```

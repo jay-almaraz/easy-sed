@@ -18,10 +18,11 @@ Here we will lose our apostrophes because we kept them inside of single quotes
 ```sh
 ./easy-sed.sh \
     '{{FIND_THIS_LITERAL}}' \
-    'If I add apostrophes within 'single quotation marks'' 
-    <<< 'eg: {{FIND_THIS_LITERAL}}'
+    'My 'apostrophes' are all gone :(' 
+    <<< 'Hello, World! {{FIND_THIS_LITERAL}}'
 
-# eg: If I add apostrophes within single quotation marks
+# Output:
+# Hello, World! My apostrophes are all gone :(
 ```
 
 Now we use dqoutes to wrap our replace string. Remember that special characters will now need to be broken with a backslash `(!,",$,%)` etc.
@@ -29,9 +30,10 @@ Now we use dqoutes to wrap our replace string. Remember that special characters 
 ./easy-sed.sh \
     '{{FIND_THIS_LITERAL}}' \
     "But here I'll 'wrap' this string in double quotes" \
-    <<< 'eg: {{FIND_THIS_LITERAL}}'
+    <<< 'Hello, World! {{FIND_THIS_LITERAL}}'
 
-# eg: I'm going to use some 'double quotation marks' in this replace string
+# Output
+# Hello, World! But here I'll 'wrap' this string in double quotes
 ```
 
 ### Double Quotations and combinations of both
@@ -40,7 +42,8 @@ Here we have a more complex replacement with apostrophes and dquotes. Remember t
 ./easy-sed.sh \
     '{{FIND_THIS_LITERAL}}' \
     "\"I'm falling down the hill, Jill\!\", Jack exclaimed." \
-    <<< 'eg: {{FIND_THIS_LITERAL}}'
+    <<< 'Hello, World! {{FIND_THIS_LITERAL}}'
     
-# eg: "I'm falling down the hill, Jill!", Jack exclaimed.
+# Output:
+# Hello, World! "I'm falling down the hill, Jill!", Jack exclaimed.
 ```

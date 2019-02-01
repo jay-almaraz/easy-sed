@@ -101,4 +101,24 @@ testUrlWithArgs() {
     assertEquals 'URL with arguments' 'https://google.com.au?wwwSubdomain=important&hideIt=true' "${REPLACEMENT}"
 }
 
+testSimpleSingleQuotesInFind() {
+    REPLACEMENT=$("${PARENT_PATH}/../"easy-sed.sh "'{THIS}'" 'HERE_I_AM_REPLACED' <<< "replace '{THIS}' not {THIS}")
+    assertEquals 'Basic string' "replace HERE_I_AM_REPLACED not {THIS}" "${REPLACEMENT}"
+}
+
+testSimpleSingleQuotesInBothFindAndReplace() {
+    REPLACEMENT=$("${PARENT_PATH}/../"easy-sed.sh "'{THIS}'" "'REPLACED_INCLUDING_SINGLES'" <<< "replace '{THIS}' not {THIS}")
+    assertEquals 'Basic string' "replace 'REPLACED_INCLUDING_SINGLES' not {THIS}" "${REPLACEMENT}"
+}
+
+testSimpleDoubleQuotesInFind() {
+    REPLACEMENT=$("${PARENT_PATH}/../"easy-sed.sh '"{{THIS}}"' "REPLACED" <<< 'replace "{{THIS}}" not {THIS}')
+    assertEquals 'Basic string' "replace REPLACED not {THIS}" "${REPLACEMENT}"
+}
+
+testSimpleDoubleQuotesInBothFindAndReplace() {
+    REPLACEMENT=$("${PARENT_PATH}/../"easy-sed.sh '"{{THIS}}"' '"REPLACED_INCLUDING_DOUBLES"' <<< 'replace "{{THIS}}" not {THIS}')
+    assertEquals 'Basic string' 'replace "REPLACED_INCLUDING_DOUBLES" not {THIS}' "${REPLACEMENT}"
+}
+
 . "${PARENT_PATH}"/shunit2/shunit2

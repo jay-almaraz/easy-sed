@@ -34,9 +34,6 @@ REPLACE=$(sed 's|'\''|'\'"\\\'"\''|g' <<< ${REPLACE})
 # exit 0
 
 if [ "${#}" == 3 ]; then
-    echo "Find: ${FIND}"
-    echo "Replace: ${REPLACE}"
-    echo "File: ${FILE}"
     COMMAND="sed -i '' 's_${FIND}_${REPLACE}_g' ${FILE}"
 else
     COMMAND="sed 's_${FIND}_${REPLACE}_g'"
